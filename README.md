@@ -11,3 +11,12 @@ for CSCD58 Winter 2022.
 Helpful link for IP packet sniffing found [here](https://www.uv.mx/personal/angelperez/files/2018/10/sniffers_texto.pdf)
 
 Already made Python packet sniffer found [here](https://github.com/EONRaider/Packet-Sniffer)
+
+What needs to be done:
+
+- Sniffing capabilities
+- Parsing
+- UI
+- ARP tables
+- DNS tables (maybe)
+- whoami information
