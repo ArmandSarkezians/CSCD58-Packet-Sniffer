@@ -1,5 +1,12 @@
+"""
+    Made by Ahmed Halat, Armand Sarkezians, and Mohamed Halat
+    CSCD58 Fall 2022
+
+    This is the main file for the sniffer. It will sniff all 
+    the packets on the network and print them out.
+"""
+
 from struct import unpack
-import sys
 import socket
 
 
@@ -118,7 +125,7 @@ if __name__ == '__main__':
         # Protocol 1 is for ICMP
         elif ipv4[3] == 1:
             icmp_type, code, checksum, data = icmp_hdr(data)
-            print('ICMP\nype: {}, Code: {}, Checksum: {}'.format(icmp_type, code, checksum))
+            print('ICMP\nType: {}, Code: {}, Checksum: {}'.format(icmp_type, code, checksum))
             print('Data: {}'.format(data))
             print('\n')
         
@@ -128,8 +135,3 @@ if __name__ == '__main__':
             print('UDP \nSource Port: {}, Destination Port: {}, Size: {}'.format(src_port, dest_port, size))
             print('Data: {}'.format(data))
             print('\n')
-
-        
-
-
-
