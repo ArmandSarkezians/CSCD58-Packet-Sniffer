@@ -9,3 +9,4 @@ import subprocess
 
 result = subprocess.run(["whois", "127.0.0.1"], stdout=subprocess.PIPE)
 print(result.stdout.decode("utf-8"))
+
