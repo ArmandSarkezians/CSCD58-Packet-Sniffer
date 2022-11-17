@@ -1,4 +1,4 @@
-import {Packet} from './Packet'
+import { Packet } from '../models/Packet'
 
 export const PACKETS: Packet[] = [
     {
@@ -30,7 +30,7 @@ export const PACKETS: Packet[] = [
         "type": "Echo Request",
         "code": 0,
         "checksum": 0,
-        "data": "",    
+        "data": "",
     },
     {
         "id": 4,

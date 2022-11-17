@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PACKETS } from '../../mockpackets';
-import { Packet } from '../../Packet';
+import { PACKETS } from '../../samples/mockpackets';
+import { Packet } from '../../models/Packet';
 
 
 @Component({

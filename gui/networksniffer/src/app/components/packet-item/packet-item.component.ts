@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Packet } from '../../Packet';
+import { Packet } from '../../models/Packet';
 
 @Component({
   selector: 'app-packet-item',
