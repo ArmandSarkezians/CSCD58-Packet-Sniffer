@@ -1,4 +1,4 @@
-# CSCD58-Packet-Sniffer
+# Network Sniffer
 
 Created by:
 
