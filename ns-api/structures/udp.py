@@ -5,14 +5,20 @@
     This file contains the UDP header structure.
 """
 
-import packet
+from .pkt import Packet
+from struct import unpack
+import socket
+from helpers.map_ip_and_mac import get_mac_addr, get_ip
 
-class UDP(packet):
-    def ___init___(self, source, destination, length, checksum, raw_data):
-        self.source = source
-        self.destination = destination
-        self.length = length
-        self.checksum = checksum
+class UDP(Packet):
+    def __init__(self, raw_data):
+        super().__init__(raw_data)
+
+        src, dest, size = unpack('! H H 2x H', raw_data[:8])
+
+        self.src = src
+        self.dest = dest
+        self.length = size
         self.raw_data = raw_data
     
     def __str__(self):
@@ -21,3 +27,4 @@ class UDP(packet):
         print('Checksum: {}'.format(self.checksum))
         print('Data: {}'.format(self.raw_data))
         print('\n')
+        return ""

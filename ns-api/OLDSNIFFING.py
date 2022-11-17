@@ -1,14 +1,6 @@
-"""
-    Made by Ahmed Halat, Armand Sarkezians, and Mohamed Halat
-    CSCD58 Fall 2022
-
-    This is the main file for the sniffer. It will sniff all 
-    the packets on the network and print them out.
-"""
-
 from struct import unpack
 import socket
-from structures import ethernet, ipv4, tcp, udp, icmp
+
 
 def get_ip(addr):
     return '.'.join(map(str, addr))
@@ -33,13 +25,9 @@ def ethr_hdr(raw_data):
     src_mac = get_mac_addr(src)
     proto = socket.htons(protocol)
 
-    # Get unpacked data
+    # Return the unpacked data
     data = raw_data[14:]
-
-    # Data structure
-    hdr = ethernet(dest_mac, src_mac, proto, data)
-
-    return hdr
+    return dest_mac, src_mac, proto, data 
 
 
 def ip_hdr(raw_data):
@@ -58,11 +46,8 @@ def ip_hdr(raw_data):
     # Get data
     data = raw_data[hdr_len:]
 
-    # Data structure
-    hdr = ipv4(ver, hdr_len, ttl, protocol, get_ip(src), get_ip(target), data)
-
     # Return the unpacked data
-    return hdr
+    return ver, hdr_len, ttl, protocol, get_ip(src), get_ip(target), data
 
 
 def tcp_hdr(raw_data):
@@ -80,11 +65,8 @@ def tcp_hdr(raw_data):
     flag_syn = (offset_res_flg & 2) >> 1
     flag_fin = offset_res_flg & 1
 
-    # Data structure
-    hdr = tcp(src_port, dest_port, offset, seq, ack, flag_urg, flag_psh, flag_rst, flag_syn, flag_fin, raw_data[offset:])
-
     # Return the unpacked data
-    return hdr
+    return src_port, dest_port, seq, ack, flag_urg, flag_ack, flag_psh, flag_rst, flag_syn, flag_fin, raw_data[offset:]
 
 
 def udp_hdr(raw_data):
@@ -93,11 +75,8 @@ def udp_hdr(raw_data):
     # Unpack the header information
     src_port, dest_port, size = unpack('! H H 2x H', raw_data[:8])
 
-    # Data structure
-    hdr = udp(src_port, dest_port, size, raw_data[8:])
-
     # Return the unpacked data
-    return hdr
+    return src_port, dest_port, size, raw_data[8:]
 
 
 def icmp_hdr(raw_data):
@@ -106,11 +85,8 @@ def icmp_hdr(raw_data):
     # Unpack the header information
     icmp_type, code, checksum = unpack('! B B H', raw_data[:4])
 
-    # Data structure
-    hdr = icmp(icmp_type, code, checksum, raw_data[4:])
-
     # Return the unpacked data
-    return hdr
+    return icmp_type, code, checksum, raw_data[4:]
 
 
 if __name__ == '__main__':
@@ -119,36 +95,40 @@ if __name__ == '__main__':
 
     while True:
         raw_data, addr = s.recvfrom(65536)
-        hdr = ethr_hdr(raw_data)
-        print(hdr)
+        dest_mac, src_mac, proto, data = ethr_hdr(raw_data)
+        print('Destination MAC: {}, Source MAC: {}, Type: {}'.format(dest_mac, src_mac, proto))
+        print('\n')
 
         # Protocol 8 is for IPv4
-        if hdr.proto == 8:
-            ipv4 = ip_hdr(raw_data)
-            print(ipv4)
+        if proto == 8:
+            ipv4 = ip_hdr(data)
+            print('IPv4\nVersion: {}, Header Length: {}, TTL: {}, Protocol: {}, Source: {}, Target: {}'.format(ipv4[0], ipv4[1], ipv4[2], ipv4[3], ipv4[4], ipv4[5]))
+            print('Data: {}'.format(ipv4[6]))
+            print('\n')
 
-            # Protocol 1 is for ICMP
-            if ipv4.proto == 1:
-                icmp = icmp_hdr(ipv4.data)
-                print(icmp)
-            
-            # Protocol 6 is for TCP
-            elif ipv4.proto == 6:
-                tcp = tcp_hdr(ipv4.data)
-                print(tcp)
-            
-            # Protocol 17 is for UDP
-            elif ipv4.proto == 17:
-                udp = udp_hdr(ipv4.data)
-                print(udp)
-            
-            # Other protocols
-            else:
-                print("Other protocol: ", ipv4.proto)
-            
-        # Other protocols
-        else:
-            print("Other protocol: ", hdr.proto)
-    
+        # Protocol 6 is for TCP
+        if ipv4[3] == 6:
+            src_port, dest_port, seq, ack, flag_urg, flag_ack, flag_psh, flag_rst, flag_syn, flag_fin, data = tcp_hdr(data)
+            print('TCP\nSource Port: {}, Destination Port: {}, Sequence: {}, Acknowledgement: {}'.format(src_port, dest_port, seq, ack))
+            print('URG: {}, ACK: {}, PSH: {}, RST: {}, SYN: {}, FIN:{}'.format(flag_urg, flag_ack, flag_psh, flag_rst, flag_syn, flag_fin))
+            print('Data: {}'.format(data))
+            print('\n')
 
-        print('------------------------------------------------------------------------------------------------------------------------')
+        # Protocol 1 is for ICMP
+        elif ipv4[3] == 1:
+            icmp_type, code, checksum, data = icmp_hdr(data)
+            print('ICMP\nype: {}, Code: {}, Checksum: {}'.format(icmp_type, code, checksum))
+            print('Data: {}'.format(data))
+            print('\n')
+        
+        # Protocol 17 is for UDP
+        elif ipv4[3] == 17:
+            src_port, dest_port, size, data = udp_hdr(data)
+            print('UDP \nSource Port: {}, Destination Port: {}, Size: {}'.format(src_port, dest_port, size))
+            print('Data: {}'.format(data))
+            print('\n')
+
+        
+
+
+
