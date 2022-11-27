@@ -2,10 +2,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-arptables',
-  templateUrl: './arptables.component.html',
-  styleUrls: ['./arptables.component.css']
+  templateUrl: './arp-tables.component.html',
+  styleUrls: ['./arp-tables.component.css'],
 })
-export class ArptablesComponent implements OnInit {
+export class ArpTablesComponent implements OnInit {
   @Input() text: string = 'NOT SET';
   @Input() color: string = 'black';
   @Output() btnClick = new EventEmitter();
@@ -14,7 +14,7 @@ export class ArptablesComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onClick(){
+  onClick() {
     this.btnClick.emit();
   }
 }

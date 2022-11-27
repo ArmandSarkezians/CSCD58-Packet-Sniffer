@@ -1,16 +1,9 @@
-<div class="container">
-    <app-header></app-header>
-    
-    <div class="buttons">
-        <app-sniffer text="Sniffer" (btnClick)="toggleSniffer()"></app-sniffer>
-        <app-arptables text="Arp Table" (btnClick)="toggleArpTables()"></app-arptables>
-        <app-whois text="Whois Information" (btnClick)="toggleWhoIs()"></app-whois>
-    </div>
-    
+<div class="header">
+  <p-menubar [model]="menuItems">
+    <ng-template pTemplate="start"> {{ title }} </ng-template>
+  </p-menubar>
 </div>
 
-<div class="container" *ngIf="showPackets">
-    <div class="packets">
-        <app-packets></app-packets>
-    </div>
+<div class="container">
+  <router-outlet></router-outlet>
 </div>
