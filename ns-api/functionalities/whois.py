@@ -6,14 +6,13 @@
 """
 
 import subprocess
-import arptables
 import re
 
 def get_ips():
-    result = arptables.get_arp_table()
+    result = get_arp_table()
     ips = re.findall(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}", result)
     return ips
-        
+
 
 def get_whois(ips):
     ips = get_ips()

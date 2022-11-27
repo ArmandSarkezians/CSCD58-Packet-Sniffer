@@ -2,12 +2,11 @@
     Made by Ahmed Halat, Armand Sarkezians, and Mohamed Halat
     CSCD58 Fall 2022
 
-    This is the main file for the sniffer. It will sniff all 
+    This is the main file for the sniffer. It will sniff all
     the packets on the network and print them out.
 """
 
 import socket
-from ..structures import Ethernet, IPv4, TCP, UDP, ICMP
 
 class Sniffer():
 
@@ -19,14 +18,14 @@ class Sniffer():
         s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(3))
         print("Listening for packets...\n")
 
-        table = {num:name[len("IPPROTO_"):] 
+        table = {num:name[len("IPPROTO_"):]
           for name, num in vars(socket).items()
             if name.startswith("IPPROTO_")}
-        
+
         while True:
             raw_data, addr = s.recvfrom(65536)
             hdr = Ethernet(raw_data)
-            
+
             # Protocol 8 is for IPv4
             if hdr.protocol == 8:
                 ip_packet = IPv4(hdr.raw_data)
