@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { MenubarModule } from 'primeng/menubar';
 import { TableModule } from 'primeng/table';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,8 +13,9 @@ import { ArpTablesComponent } from './components/arptables/arp-tables.component'
 import { HeaderComponent } from './components/header/header.component';
 import { PacketsComponent } from './components/packets/packets.component';
 import { PacketItemComponent } from './components/packet-item/packet-item.component';
+import { environment } from 'src/environments/environment';
 
-const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
+const config: SocketIoConfig = { url: environment.backendUrl, options: {} };
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     SocketIoModule.forRoot(config),
     MenubarModule,
     TableModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
