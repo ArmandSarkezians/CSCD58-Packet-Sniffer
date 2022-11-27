@@ -5,19 +5,19 @@
     This file contains the IPv4 header structure.
 """
 
-from .pkt import Packet
+from structures import Ethernet
 from struct import unpack
-import socket
-from helpers.map_ip_and_mac import get_mac_addr, get_ip
+from helpers.map_ip_and_mac import get_ip
 
-class IPv4(Packet):
+class IPv4(Ethernet):
     def __init__(self, raw_data):
         super().__init__(raw_data)
-        ttl, protocol, src, dest = unpack('! 8x B B 2x 4s 4s', raw_data[:20]) 
 
         ver_hdr_len = raw_data[0]
         ver = ver_hdr_len >> 4
         hdr_len = (ver_hdr_len & 15) * 4
+
+        ttl, protocol, src, dest = unpack('! 8x B B 2x 4s 4s', raw_data[:20])
 
         data = raw_data[hdr_len:]
 
@@ -30,6 +30,7 @@ class IPv4(Packet):
         self.src = src
         self.dest = dest
         self.raw_data = data
+
 
     def __str__(self):
         print('----------IPv4----------')

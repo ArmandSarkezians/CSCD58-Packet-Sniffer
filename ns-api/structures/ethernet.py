@@ -18,10 +18,6 @@ class Ethernet(Packet):
         self.dest = get_mac_addr(dest)
         self.src = get_mac_addr(src)
         self.protocol = socket.htons(protocol)
-
-        self.src = src
-        self.dest = dest
-        self.protocol = protocol
         self.raw_data = raw_data[14:]
 
     def __str__(self):

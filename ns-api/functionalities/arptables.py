@@ -12,4 +12,4 @@ def get_arp_table():
     return result.stdout.decode("utf-8")
 
 if __name__ == "__main__":
-    get_arp_table()
+    print(get_arp_table())

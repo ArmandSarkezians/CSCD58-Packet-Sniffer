@@ -15,11 +15,12 @@ def get_ips():
     return ips
         
 
-def whois(ips):
+def get_whois(ips):
+    ips = get_ips()
     for item in ips:
         result = subprocess.run(["whois", item], stdout=subprocess.PIPE)
         return result.stdout.decode("utf-8")
 
 if __name__ == "__main__":
-    ips = get_ips()
-    whois(ips)
+    print(get_whois())
+

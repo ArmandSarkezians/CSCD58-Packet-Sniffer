@@ -106,6 +106,8 @@ if __name__ == '__main__':
             print('Data: {}'.format(ipv4[6]))
             print('\n')
 
+        print(ipv4[3])
+
         # Protocol 6 is for TCP
         if ipv4[3] == 6:
             src_port, dest_port, seq, ack, flag_urg, flag_ack, flag_psh, flag_rst, flag_syn, flag_fin, data = tcp_hdr(data)

@@ -4,9 +4,7 @@ from redis import Redis
 from flask import Flask
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
-from structures import Ethernet, IPv4, TCP, UDP, ICMP
-import arptables
-from sniffer import Sniffer
+from functionalities import Sniffer, get_arp_table, get_whois
 
 thread = None
 app = Flask(__name__)
@@ -19,7 +17,7 @@ redis_store = Redis.from_url(config.REDIS_URL)
 socketio = SocketIO(app, cors_allowed_origins="*",  async_mode='threading')
 s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(3))
 
-arptable = arptables.get_arp_table()
+arptable = get_arp_table()
 redis_store.set("arptable", arptable)
 
 @app.route('/')
@@ -28,11 +26,11 @@ def index():
 
 @app.route('/arp')
 def arp():
-    return 'Arp Table'
+    return get_arp_table()
 
 @app.route('/whois')
 def whois():
-    return 'Whois'
+    return get_whois()
 
 
 @socketio.on('connect')
