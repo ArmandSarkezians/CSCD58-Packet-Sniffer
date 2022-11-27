@@ -10,9 +10,30 @@
     justify-content: right;
 }
 
+.header {
+    margin: 10px auto;
+    width: 95%;
+}
+
+::ng-deep .p-menubar-start {
+    margin-right: auto;
+    font-weight: 900;
+    font-size: 23px;
+}
+
+::ng-deep .p-menubar-end {
+    display: none;
+}
+
 .packets{
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
+}
+
+.outlet {
+    display: flex;
+    margin: 20px auto;
+    width: 90%;
 }
