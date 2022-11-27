@@ -30,7 +30,7 @@ def arp():
 
 @app.route('/whois')
 def whois():
-    return get_whois()
+    return get_whois().to_json()
 
 
 @socketio.on('connect')

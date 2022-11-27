@@ -8,6 +8,8 @@
 import subprocess
 from arptables import get_arp_table
 import re
+from .arptables import get_arp_table
+from structures import WhoIs
 
 def get_ips():
     result = get_arp_table()
@@ -19,8 +21,9 @@ def get_whois():
     ips = get_ips()
     for item in ips:
         result = subprocess.run(["whois", item], stdout=subprocess.PIPE)
-        return result.stdout.decode("utf-8")
+        data = result.stdout.decode("utf-8")
+        whois = WhoIs(data)
+        return whois
 
 if __name__ == "__main__":
     print(get_whois())
-
