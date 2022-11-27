@@ -6,7 +6,6 @@
 """
 
 import subprocess
-from arptables import get_arp_table
 import re
 from .arptables import get_arp_table
 from structures import WhoIs

@@ -47,14 +47,58 @@ OrgTechRef:    https://rdap.arin.net/registry/entity/NOC32014-ARIN
 """
 import re
 
+# Whois regex
 net_range_regex = r"NetRange:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*-\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})"
 cidr_regex = r"CIDR:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/(\d{1,3})"
-net_name_regex = r"NetName:\s*(\w+)"
-net_handle_regex = r"NetHandle:\s*(\w+)"
-parent_regex = r"Parent:\s*(\w+)"
-net_type_regex = r"NetType:\s*(\w+)"
-origin_as_regex = r"OriginAS:\s*(\w+)"
-organization_regex = r"Organization:\s*(\w+)"
+net_name_regex = r"NetName:\s*(.*)"
+net_handle_regex = r"NetHandle:\s*(.*)"
+parent_regex = r"Parent:\s*(.*)"
+net_type_regex = r"NetType:\s*(.*)"
+origin_as_regex = r"OriginAS:\s*(.*)"
+organization_regex = r"Organization:\s*(.*)"
+
+# Org regex
+org_name_regex = r"OrgName:\s*(.*)"
+org_id_regex = r"OrgId:\s*(.*)"
+org_address_regex = r"Address:\s*(.*)"
+org_city_regex = r"City:\s*(.*)"
+org_state_prov_regex = r"StateProv:\s*(.*)"
+org_postal_code_regex = r"PostalCode:\s*(.*)"
+org_country_regex = r"Country:\s*(.*)"
+
+class Org:
+    def __init__(self, data):
+        self.name = None
+        self.id = None
+        self.address = None
+        self.city = None
+        self.state_prov = None
+        self.postal_code = None
+        self.country = None
+        # self.reg_date = None
+        # self.updated = None
+
+    def parse(self, data):
+        self.name = re.search(org_name_regex, data).group(1)
+        self.id = re.search(org_id_regex, data).group(1)
+        self.address = re.findall(org_address_regex, data)
+        self.city = re.search(org_city_regex, data).group(1)
+        self.state_prov = re.search(org_state_prov_regex, data).group(1)
+        self.postal_code = re.search(org_postal_code_regex, data).group(1)
+        self.country = re.search(org_country_regex, data).group(1)
+
+    def to_json(self):
+        return {
+            "name": self.name,
+            "id": self.id,
+            "address": self.address,
+            "city": self.city,
+            "state_prov": self.state_prov,
+            "postal_code": self.postal_code,
+            "country": self.country
+        }
+
+
 
 class WhoIs:
     def __init__(self, data):
@@ -66,18 +110,20 @@ class WhoIs:
         self.net_type = None
         self.origin_as = None
         self.organization = None
+        self.org = Org(data)
         self.data = data
         self.parse()
 
     def parse(self):
       self.net_range = re.findall(net_range_regex, self.data)
       self.cidr = re.findall(cidr_regex, self.data)
-      self.net_name = re.findall(net_name_regex, self.data)
-      self.net_handle = re.findall(net_handle_regex, self.data)
-      self.parent = re.findall(parent_regex, self.data)
-      self.net_type = re.findall(net_type_regex, self.data)
-      self.origin_as = re.findall(origin_as_regex, self.data)
-      self.organization = re.findall(organization_regex, self.data)
+      self.net_name = re.search(net_name_regex, self.data).group(1)
+      self.net_handle = re.search(net_handle_regex, self.data).group(1)
+      self.parent = re.search(parent_regex, self.data).group(1)
+      self.net_type = re.search(net_type_regex, self.data).group(1)
+      self.origin_as = re.search(origin_as_regex, self.data).group(1)
+      self.organization = re.search(organization_regex, self.data).group(1)
+      self.org.parse(self.data)
 
     def to_json(self):
         return {
@@ -88,6 +134,7 @@ class WhoIs:
             "parent": self.parent,
             "net_type": self.net_type,
             "origin_as": self.origin_as,
-            "organization": self.organization,
+            "organization_name": self.organization,
+            "org": self.org.to_json(),
             "raw": self.data
         }

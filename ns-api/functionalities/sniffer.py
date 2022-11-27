@@ -7,7 +7,7 @@
 """
 
 import socket
-from ..structures import Ethernet, IPv4, TCP, UDP, ICMP
+from structures import Ethernet, IPv4, TCP, UDP, ICMP
 
 class Sniffer():
 
