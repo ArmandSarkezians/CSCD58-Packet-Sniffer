@@ -5,6 +5,8 @@ from flask import Flask
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 from structures import Ethernet, IPv4, TCP, UDP, ICMP
+import arptables
+from sniffer import Sniffer
 
 thread = None
 app = Flask(__name__)
@@ -17,8 +19,8 @@ redis_store = Redis.from_url(config.REDIS_URL)
 socketio = SocketIO(app, cors_allowed_origins="*",  async_mode='threading')
 s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(3))
 
-redis_store.set("arp_table", "[]")
-print(redis_store.get("arp_table"))
+arptable = arptables.get_arp_table()
+redis_store.set("arptable", arptable)
 
 @app.route('/')
 def index():
@@ -44,37 +46,9 @@ def start_sniffer():
 
 @socketio.event
 def sniffer():
-    print("Listening for packets...\n")
-    while True:
-        raw_data, addr = s.recvfrom(65536)
-        hdr = Ethernet(raw_data)
-        # Protocol 8 is for IPv4
-        if hdr.protocol == 8:
-            ipv4 = IPv4(raw_data)
+    rat = Sniffer(socketio, redis_store)
+    rat.sniff()
 
-            # Protocol 1 is for ICMP
-            if ipv4.protocol == 1:
-                icmp = ICMP(ipv4.raw_data)
-                socketio.emit('packets', icmp)
-                print(icmp)
-            # Protocol 6 is for TCP
-            elif ipv4.protocol == 6:
-                tcp = TCP(ipv4.raw_data)
-                socketio.emit('packets', tcp)
-                print(tcp)
-            # Protocol 17 is for UDP
-            elif ipv4.protocol == 17:
-                udp = UDP(ipv4.raw_data)
-                socketio.emit('packets', udp)
-                print(udp)
-            # Other protocols
-            else:
-                print("Other protocol: ", ipv4.protocol)
-                socketio.emit('packets', ipv4.protocol)
-        # Other protocols
-        else:
-            print("Other protocol: ", hdr)
-            socketio.emit('packets', hdr)
 
 if __name__ == '__main__':
     app.logger.info('Starting app')
