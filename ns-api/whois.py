@@ -6,7 +6,20 @@
 """
 
 import subprocess
+import arptables
+import re
 
-result = subprocess.run(["whois", "127.0.0.1"], stdout=subprocess.PIPE)
-print(result.stdout.decode("utf-8"))
+def get_ips():
+    result = arptables.get_arp_table()
+    ips = re.findall(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}", result)
+    return ips
+        
 
+def whois(ips):
+    for item in ips:
+        result = subprocess.run(["whois", item], stdout=subprocess.PIPE)
+        return result.stdout.decode("utf-8")
+
+if __name__ == "__main__":
+    ips = get_ips()
+    whois(ips)
