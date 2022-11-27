@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PACKETS } from '../../samples/mockpackets';
-import { Packet } from '../../models/Packet';
+import { Packet, PacketTable } from '../../models/Packet';
 import { Socket } from 'ngx-socket-io';
 
 @Component({
@@ -9,7 +9,7 @@ import { Socket } from 'ngx-socket-io';
   styleUrls: ['./packets.component.css'],
 })
 export class PacketsComponent implements OnInit {
-  packets = PACKETS;
+  packets = PACKETS as PacketTable[];
   messages: any[] = [];
 
   constructor(private socket: Socket) {}

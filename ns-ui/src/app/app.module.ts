@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { MenubarModule } from 'primeng/menubar';
+import { TableModule } from 'primeng/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +30,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     AppRoutingModule,
     SocketIoModule.forRoot(config),
     MenubarModule,
+    TableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,7 +1,23 @@
-<app-packet-item
-  *ngFor="let packet of packets"
-  [packet]="packet"
-></app-packet-item>
+<p-table [value]="packets" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Id</th>
+      <th>Protocol</th>
+      <th>Source</th>
+      <th>Destination</th>
+      <th>Sequence</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-packet>
+    <tr>
+      <td>{{ packet.id }}</td>
+      <td>{{ packet.protocol }}</td>
+      <td>{{ packet.source }}</td>
+      <td>{{ packet.destination }}</td>
+      <td>{{ packet.sequence }}</td>
+    </tr>
+  </ng-template>
+</p-table>
 <!-- print all messages -->
 <div *ngFor="let msg of messages">
   <p>{{ msg | json }}</p>

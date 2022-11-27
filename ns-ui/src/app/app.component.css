@@ -31,3 +31,9 @@
     width: 100%;
     height: 100%;
 }
+
+.outlet {
+    display: flex;
+    margin: 20px auto;
+    width: 90%;
+}
