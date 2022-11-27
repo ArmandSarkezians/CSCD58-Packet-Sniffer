@@ -1,19 +1,24 @@
 # pylint: disable=import-error
-import time, socket
+import config, time, socket
+from redis import Redis
 from flask import Flask
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 from structures import Ethernet, IPv4, TCP, UDP, ICMP
 
+thread = None
 app = Flask(__name__)
 CORS(app)
-# log cors errors
-app.logger.setLevel('INFO')
 
+app.logger.setLevel('INFO')
 app.debug = True
+
+redis_store = Redis.from_url(config.REDIS_URL)
 socketio = SocketIO(app, cors_allowed_origins="*",  async_mode='threading')
 s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(3))
-thread = None
+
+redis_store.set("arp_table", "[]")
+print(redis_store.get("arp_table"))
 
 @app.route('/')
 def index():
@@ -29,7 +34,7 @@ def whois():
 
 
 @socketio.on('connect')
-def emit_market_data():
+def start_sniffer():
     global thread
     emit('packets', "sniffer")
     if thread is None:

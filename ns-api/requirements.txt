@@ -3,3 +3,5 @@ flask_cors
 
 # websockets
 flask_socketio
+# database
+redis
