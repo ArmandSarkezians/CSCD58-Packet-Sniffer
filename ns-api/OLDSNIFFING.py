@@ -1,5 +1,4 @@
 from struct import unpack
-import sys
 import socket
 
 

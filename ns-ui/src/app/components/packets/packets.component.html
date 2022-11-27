@@ -1,0 +1,8 @@
+<app-packet-item
+  *ngFor="let packet of packets"
+  [packet]="packet"
+></app-packet-item>
+<!-- print all messages -->
+<div *ngFor="let msg of messages">
+  <p>{{ msg | json }}</p>
+</div>
