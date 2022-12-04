@@ -15,6 +15,12 @@ CORS(app)
 socketio = SocketIO(app, cors_allowed_origins="*",  async_mode='threading')
 s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(3))
 
+def emitter(channel, data):
+    socketio.emit(channel, data)
+    print(data)
+
+RAT = Sniffer(emitter)
+
 @app.route('/')
 def index():
     return 'Hello World'
@@ -44,22 +50,26 @@ def load_packets():
     events = [] # redis_store.lrange("packets", 0, -1 )
     return events
 
-@socketio.on('connect')
+@socketio.on('disconnect')
+def stop_sniffing():
+    global thread
+    RAT.stop()
+
+
+@app.route('/start_sniffing')
 def start_sniffer():
     global thread
     if thread is None:
         thread = socketio.start_background_task(target=sniffer)
-
-def emitter(channel, data):
-    socketio.emit(channel, data)
-    print(data)
-    # append('packets', data.__dict__)
+        return 'Sniffer started'
+    else:
+        RAT.start()
+        return 'Sniffer Resumed'
 
 @socketio.event
 def sniffer():
     print("Listening for packets...\n")
-    rat = Sniffer(emitter)
-    rat.sniff()
+    RAT.start()
 
 if __name__ == '__main__':
     app.logger.info('Starting app')

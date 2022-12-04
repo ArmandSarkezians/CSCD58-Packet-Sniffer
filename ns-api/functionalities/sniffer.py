@@ -10,8 +10,17 @@ import socket
 from structures import Ethernet, IPv4, TCP, UDP, ICMP
 
 class Sniffer():
-    def __init__(self, emitter):
+    def __init__(self, emitter, on=False):
         self.emitter = emitter
+        self.on = on
+
+    def start(self):
+        self.on = True
+        self.sniff()
+
+    def stop(self):
+        self.on = False
+
 
     def sniff(self):
         s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(3))
@@ -21,7 +30,7 @@ class Sniffer():
           for name, num in vars(socket).items()
             if name.startswith("IPPROTO_")}
 
-        while True:
+        while self.on:
             raw_data, _ = s.recvfrom(65536)
             hdr = Ethernet(raw_data)
 
