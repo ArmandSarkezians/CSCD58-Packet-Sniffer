@@ -3,7 +3,7 @@ import socket
 from flask import Flask
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
-from functionalities import Sniffer, get_arp_table, get_whois
+from functionalities import Sniffer, get_arp_table, get_whois, get_nmap
 from helpers import load, append, redis_store
 
 thread = None
@@ -23,9 +23,21 @@ def index():
 def arp():
     return get_arp_table()
 
+
+@app.route('/lookup/<ip>')
+def lookup(ip):
+    whois = get_whois([ip])[0].to_json()
+    nmap = get_nmap(ip)
+    return {
+        "whois": whois,
+        "nmap": nmap
+    }
+
+
 @app.route('/whois')
 def whois():
-    return get_whois().to_json()
+    res = map(lambda x: x.to_json(), get_whois())
+    return list(res)
 
 @app.route('/load_packets')
 def load_packets():
