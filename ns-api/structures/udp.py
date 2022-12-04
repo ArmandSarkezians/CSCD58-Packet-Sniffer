@@ -10,7 +10,7 @@ from struct import unpack
 import socket
 from helpers.map_ip_and_mac import get_mac_addr, get_ip
 
-class UDP(IPv4):
+class UDP(IPv4, dict):
     def __init__(self, raw_data):
         super().__init__(raw_data)
 
@@ -20,11 +20,12 @@ class UDP(IPv4):
         self.dest = dest
         self.length = size
         self.raw_data = raw_data
-    
+
+        dict.__init__(self, raw_data=raw_data, src=self.src, dest=self.dest, length=self.length, name='UDP')
+
     def __str__(self):
         print('----------UDP----------')
-        print('Source Port: {}, Destination Port: {}, Length: {}'.format(self.source, self.destination, self.length))
-        print('Checksum: {}'.format(self.checksum))
+        print('Source Port: {}, Destination Port: {}, Length: {}'.format(self.src, self.dest, self.length))
         print('Data: {}'.format(self.raw_data))
         print('\n')
         return ""

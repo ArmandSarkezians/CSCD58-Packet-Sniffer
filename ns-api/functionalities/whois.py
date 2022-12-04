@@ -5,8 +5,7 @@
     This is the main file for the whois information grabber.
 """
 
-import subprocess
-import re
+import subprocess, re
 from .arptables import get_arp_table
 from structures import WhoIs
 

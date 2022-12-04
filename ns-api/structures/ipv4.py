@@ -9,7 +9,7 @@ from structures import Ethernet
 from struct import unpack
 from helpers.map_ip_and_mac import get_ip
 
-class IPv4(Ethernet):
+class IPv4(Ethernet, dict):
     def __init__(self, raw_data):
         super().__init__(raw_data)
 
@@ -31,6 +31,7 @@ class IPv4(Ethernet):
         self.dest = dest
         self.raw_data = data
 
+        dict.__init__(self, version=self.version, ttl=self.ttl, protocol=self.protocol, src=self.src, dest=self.dest, raw_data=self.raw_data, name='IPv4')
 
     def __str__(self):
         print('----------IPv4----------')
