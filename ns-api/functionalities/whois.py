@@ -11,8 +11,7 @@ from structures import WhoIs
 
 def get_ips():
     result = get_arp_table()
-    ips = re.findall(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}", result)
-    return ips
+    return map(lambda x: x['ip'], result)
 
 
 def get_whois():
