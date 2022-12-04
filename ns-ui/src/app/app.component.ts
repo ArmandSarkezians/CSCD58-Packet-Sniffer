@@ -22,7 +22,7 @@ export class AppComponent {
     {
       label: 'ArpTable',
       icon: 'pi pi-fw pi-table',
-      routerLink: ['/arptable'],
+      routerLink: ['/arptables'],
     },
   ];
 

@@ -1,3 +1,20 @@
-<button [ngStyle]="{'background-color': color}" class="btn" (click)="onClick()">
-    {{ text }}
-</button>
+<p-table [value]="arpTable">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>IP Address</th>
+      <th>HW Type</th>
+      <th>MAC Address</th>
+      <th>Flags</th>
+      <th>Interface</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-arp>
+    <tr>
+      <td>{{ arp.ip }}</td>
+      <td>{{ arp.hwtype }}</td>
+      <td>{{ arp.mac }}</td>
+      <td>{{ arp.flags }}</td>
+      <td>{{ arp.mask }}</td>
+    </tr>
+  </ng-template>
+</p-table>
