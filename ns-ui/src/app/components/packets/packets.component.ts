@@ -12,13 +12,26 @@ export class PacketsComponent implements OnInit {
   packets = [] as PacketTable[];
   messages: any[] = [];
 
+  update = true;
+  options = [{l: 'On', v: true}, {l: 'Off', v: false}]
+
   constructor(private socket: Socket) {}
 
   ngOnInit(): void {
     this.socket.fromEvent('packets').subscribe((data: any) => {
-      console.log(data);
-      // push data to top of packets
-      this.packets.unshift(data);
+      if (this.update) {
+        console.log(data);
+        this.packets.unshift(data);
+      }
     });
+  }
+
+  clickedItem(_t12: any) {
+    throw new Error('Method not implemented.');
+  }
+
+  toggleUpdating(event: any) {
+    console.log(event);
+    this.update = event.value;
   }
 }

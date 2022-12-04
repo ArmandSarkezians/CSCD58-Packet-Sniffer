@@ -3,7 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { MenubarModule } from 'primeng/menubar';
 import { TableModule } from 'primeng/table';
+import { SelectButtonModule } from 'primeng/selectbutton';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,7 +35,9 @@ const config: SocketIoConfig = { url: environment.backendUrl, options: {} };
     SocketIoModule.forRoot(config),
     MenubarModule,
     TableModule,
+    SelectButtonModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

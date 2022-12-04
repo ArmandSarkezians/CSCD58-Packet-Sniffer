@@ -1,18 +1,41 @@
-<p-table [value]="packets" [tableStyle]="{ 'min-width': '50rem' }">
+<div class="flex" style="display: flex;">
+  <h1 style="padding-right: 15px;">Sniffing</h1>
+  <p-selectButton
+    [options]="options"  optionLabel="l" optionValue="v"
+    (onChange)="toggleUpdating($event)">
+  >
+  </p-selectButton>
+</div>
+
+<p-table
+  [value]="packets"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  styleClass="p-datatable-striped p-datatable-gridlines"
+  [globalFilterFields]="['protocol','src','dest']"
+>
   <ng-template pTemplate="header">
     <tr>
-      <th>Protocol</th>
-      <th>Source Port</th>
-      <th>Destination Port</th>
+      <th>
+        Protocol
+        <p-columnFilter type="text" field="protocol" display="menu"></p-columnFilter>
+      </th>
+      <th>
+        Source Port
+        <p-columnFilter type="text" field="src" display="menu"></p-columnFilter>
+      </th>
+      <th>
+        Destination Port
+        <p-columnFilter type="text" field="dest" display="menu"></p-columnFilter>
+      </th>
       <th>Sequence</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-packet>
-    <tr>
+    <tr (onClick)="clickedItem(packet)" style="cursor: pointer;">
       <td>{{ packet.protocol }}/{{packet.name}}</td>
       <td>{{ packet.src }}</td>
       <td>{{ packet.dest }}</td>
-      <td>{{ packet.sequence }}</td>
+      <td>{{ packet.seq }}</td>
     </tr>
   </ng-template>
 </p-table>
