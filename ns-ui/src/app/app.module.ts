@@ -18,6 +18,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { PacketsComponent } from './components/packets/packets.component';
 import { PacketItemComponent } from './components/packet-item/packet-item.component';
 import { environment } from 'src/environments/environment';
+import { ArpItemComponent } from './components/arp-item/arp-item.component';
 
 const config: SocketIoConfig = { url: environment.backendUrl, options: {} };
 
@@ -30,6 +31,7 @@ const config: SocketIoConfig = { url: environment.backendUrl, options: {} };
     HeaderComponent,
     PacketsComponent,
     PacketItemComponent,
+    ArpItemComponent,
   ],
   imports: [
     BrowserModule,

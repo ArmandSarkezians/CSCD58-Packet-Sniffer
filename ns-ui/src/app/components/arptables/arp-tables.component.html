@@ -6,6 +6,7 @@
       <th>MAC Address</th>
       <th>Flags</th>
       <th>Interface</th>
+      <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-arp>
@@ -15,6 +16,15 @@
       <td>{{ arp.mac }}</td>
       <td>{{ arp.flags }}</td>
       <td>{{ arp.mask }}</td>
+      <td>
+        <p-button
+          pRipple
+          icon="pi pi-info"
+          class="p-button-rounded p-button-info"
+          (click)="clickedItem(arp)"
+        >
+        </p-button>
+      </td>
     </tr>
   </ng-template>
 </p-table>

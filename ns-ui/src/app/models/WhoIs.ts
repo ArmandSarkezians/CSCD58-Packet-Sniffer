@@ -6,6 +6,6 @@ export interface WhoIs {
   parent: string;
   net_type: string;
   origin_as: string;
-  organization: string;
+  org: any;
   raw: string;
 }

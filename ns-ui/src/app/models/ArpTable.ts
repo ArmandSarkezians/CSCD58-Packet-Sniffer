@@ -1,3 +1,5 @@
+import { WhoIs } from './WhoIs';
+
 export interface ArpTableRow {
   ip: string;
   hwtype: string;
@@ -7,3 +9,8 @@ export interface ArpTableRow {
 }
 
 export type ArpTable = ArpTableRow[];
+
+export type ArpData = {
+  whois: WhoIs;
+  nmap: any;
+};

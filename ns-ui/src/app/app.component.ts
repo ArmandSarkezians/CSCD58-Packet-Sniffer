@@ -14,13 +14,18 @@ export class AppComponent {
       icon: 'pi pi-fw pi-home',
       routerLink: ['/sniffer'],
     },
+    // {
+    //   label: 'Whois',
+    //   icon: 'pi pi-fw pi-user',
+    //   routerLink: ['/whois'],
+    // },
+    // {
+    //   label: 'ArpTable',
+    //   icon: 'pi pi-fw pi-table',
+    //   routerLink: ['/arptables'],
+    // },
     {
-      label: 'Whois',
-      icon: 'pi pi-fw pi-user',
-      routerLink: ['/whois'],
-    },
-    {
-      label: 'ArpTable',
+      label: 'Network Details',
       icon: 'pi pi-fw pi-table',
       routerLink: ['/arptables'],
     },

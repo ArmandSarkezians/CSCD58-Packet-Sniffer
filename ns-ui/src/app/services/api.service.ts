@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { WhoIs } from '../models/WhoIs';
-import { ArpTable } from '../models/ArpTable';
+import { ArpData, ArpTable } from '../models/ArpTable';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +15,10 @@ export class ApiService {
 
   whois(): Observable<WhoIs> {
     return this.http.get<WhoIs>(environment.backendUrl + '/whois');
+  }
+
+  lookup(ip: string): Observable<ArpData> {
+    return this.http.get<ArpData>(environment.backendUrl + '/lookup/' + ip);
   }
 
   arpTables(): Observable<ArpTable> {
