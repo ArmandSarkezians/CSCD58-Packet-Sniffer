@@ -66,6 +66,12 @@ org_state_prov_regex = r"StateProv:\s*(.*)"
 org_postal_code_regex = r"PostalCode:\s*(.*)"
 org_country_regex = r"Country:\s*(.*)"
 
+def search_regex(regex, data):
+    result = re.search(regex, data)
+    if result:
+        return result.group(1)
+    return None
+
 class Org:
     def __init__(self, data):
         self.name = None
@@ -79,13 +85,13 @@ class Org:
         # self.updated = None
 
     def parse(self, data):
-        self.name = re.search(org_name_regex, data).group(1)
-        self.id = re.search(org_id_regex, data).group(1)
+        self.name = search_regex(org_name_regex, data)
+        self.id = search_regex(org_id_regex, data)
         self.address = re.findall(org_address_regex, data)
-        self.city = re.search(org_city_regex, data).group(1)
-        self.state_prov = re.search(org_state_prov_regex, data).group(1)
-        self.postal_code = re.search(org_postal_code_regex, data).group(1)
-        self.country = re.search(org_country_regex, data).group(1)
+        self.city = search_regex(org_city_regex, data)
+        self.state_prov = search_regex(org_state_prov_regex, data)
+        self.postal_code = search_regex(org_postal_code_regex, data)
+        self.country = search_regex(org_country_regex, data)
 
     def to_json(self):
         return {
@@ -117,12 +123,12 @@ class WhoIs:
     def parse(self):
       self.net_range = re.findall(net_range_regex, self.data)
       self.cidr = re.findall(cidr_regex, self.data)
-      self.net_name = re.search(net_name_regex, self.data).group(1)
-      self.net_handle = re.search(net_handle_regex, self.data).group(1)
-      self.parent = re.search(parent_regex, self.data).group(1)
-      self.net_type = re.search(net_type_regex, self.data).group(1)
-      self.origin_as = re.search(origin_as_regex, self.data).group(1)
-      self.organization = re.search(organization_regex, self.data).group(1)
+      self.net_name = search_regex(net_name_regex, self.data)
+      self.net_handle = search_regex(net_handle_regex, self.data)
+      self.parent = search_regex(parent_regex, self.data)
+      self.net_type = search_regex(net_type_regex, self.data)
+      self.origin_as = search_regex(origin_as_regex, self.data)
+      self.organization = search_regex(organization_regex, self.data)
       self.org.parse(self.data)
 
     def to_json(self):

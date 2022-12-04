@@ -14,13 +14,14 @@ def get_ips():
     return map(lambda x: x['ip'], result)
 
 
-def get_whois():
-    ips = get_ips()
+def get_whois(ips=get_ips()):
+    whois = []
     for item in ips:
         result = subprocess.run(["whois", item], stdout=subprocess.PIPE)
         data = result.stdout.decode("utf-8")
-        whois = WhoIs(data)
-        return whois
+        print(item)
+        whois.append(WhoIs(data))
+    return whois
 
 if __name__ == "__main__":
     print(get_whois())
