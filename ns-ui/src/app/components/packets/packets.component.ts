@@ -9,7 +9,7 @@ import { Socket } from 'ngx-socket-io';
   styleUrls: ['./packets.component.css'],
 })
 export class PacketsComponent implements OnInit {
-  packets = PACKETS as PacketTable[];
+  packets = [] as PacketTable[];
   messages: any[] = [];
 
   constructor(private socket: Socket) {}
@@ -17,7 +17,8 @@ export class PacketsComponent implements OnInit {
   ngOnInit(): void {
     this.socket.fromEvent('packets').subscribe((data: any) => {
       console.log(data);
-      this.messages.push(data);
+      // push data to top of packets
+      this.packets.unshift(data);
     });
   }
 }

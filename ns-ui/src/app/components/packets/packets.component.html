@@ -1,19 +1,17 @@
 <p-table [value]="packets" [tableStyle]="{ 'min-width': '50rem' }">
   <ng-template pTemplate="header">
     <tr>
-      <th>Id</th>
       <th>Protocol</th>
-      <th>Source</th>
-      <th>Destination</th>
+      <th>Source Port</th>
+      <th>Destination Port</th>
       <th>Sequence</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-packet>
     <tr>
-      <td>{{ packet.id }}</td>
-      <td>{{ packet.protocol }}</td>
-      <td>{{ packet.source }}</td>
-      <td>{{ packet.destination }}</td>
+      <td>{{ packet.protocol }}/{{packet.name}}</td>
+      <td>{{ packet.src }}</td>
+      <td>{{ packet.dest }}</td>
       <td>{{ packet.sequence }}</td>
     </tr>
   </ng-template>
