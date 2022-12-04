@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Packet } from '../../models/Packet';
 
 @Component({
@@ -9,9 +10,10 @@ import { Packet } from '../../models/Packet';
 export class PacketItemComponent implements OnInit {
   @Input() packet: Packet = {'id': 0};
 
-  constructor() { }
+  constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig) { }
 
   ngOnInit(): void {
+    this.packet = this.config.data.packet;
+    console.log(this.packet);
   }
-
 }

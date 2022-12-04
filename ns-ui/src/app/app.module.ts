@@ -6,6 +6,8 @@ import { TableModule } from 'primeng/table';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { ButtonModule } from 'primeng/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,7 +39,9 @@ const config: SocketIoConfig = { url: environment.backendUrl, options: {} };
     TableModule,
     SelectButtonModule,
     HttpClientModule,
+    DynamicDialogModule,
     BrowserAnimationsModule,
+    ButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

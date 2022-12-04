@@ -1,24 +1,22 @@
 export interface Packet {
-  id: number;
-  source?: string;
-  destination?: string;
-  sequence?: number;
-  ack?: number;
-  protocol?: string;
-  URG?: number;
-  ACK?: number;
-  PSH?: number;
-  RST?: number;
-  SYN?: number;
-  FIN?: number;
-  data?: string;
-  size?: number;
-  type?: string;
-  code?: number;
-  checksum?: number;
-  header_length?: number;
+  id?: number;
+  name?: string;
+  version?: number;
   ttl?: number;
+  offset?: number;
+  seq?: number;
+  ack?: number;
+  urg?: number;
+  psh?: number;
+  rst?: number;
+  syn?: number;
+  fin?: number;
+  raw_data?: any;
+  dest?: number;
+  src?: number;
+  protocol?: number;
 }
+
 
 export interface PacketTable {
   id: number;

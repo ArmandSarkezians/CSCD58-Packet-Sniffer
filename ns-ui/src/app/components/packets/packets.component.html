@@ -28,6 +28,7 @@
         <p-columnFilter type="text" field="dest" display="menu"></p-columnFilter>
       </th>
       <th>Sequence</th>
+      <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-packet>
@@ -36,6 +37,11 @@
       <td>{{ packet.src }}</td>
       <td>{{ packet.dest }}</td>
       <td>{{ packet.seq }}</td>
+      <td>
+        <p-button pRipple icon="pi pi-info" class="p-button-rounded p-button-info"
+          (click)="clickedItem(packet)">
+        </p-button>
+      </td>
     </tr>
   </ng-template>
 </p-table>
