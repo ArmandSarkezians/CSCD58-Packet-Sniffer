@@ -4,6 +4,7 @@ import { Packet, PacketTable } from '../../models/Packet';
 import { Socket } from 'ngx-socket-io';
 import { DialogService } from 'primeng/dynamicdialog';
 import { PacketItemComponent } from '../packet-item/packet-item.component';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-packets',
@@ -17,24 +18,34 @@ export class PacketsComponent implements OnInit {
 
   MAX_PACKETS = 300;
 
-  update = true;
-  options = [{l: 'On', v: true}, {l: 'Off', v: false}]
+  update = false;
+  options = [
+    { l: 'On', v: true },
+    { l: 'Off', v: false },
+  ];
 
   constructor(
+    private api: ApiService,
     private socket: Socket,
     public dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
-    this.socket.fromEvent('packets').subscribe((data: any) => {
-      if (this.update) {
-        console.log(data);
-        this.packets.unshift(data);
+    this.subscribeToSocket();
+    window.onbeforeunload = (e) => {
+      this.update = false;
+      this.socket.disconnect();
+      this.socket.removeAllListeners();
+    };
+  }
 
-        if (this.packets.length > this.MAX_PACKETS) {
-          // remove 100 packets
-          this.packets.splice(this.MAX_PACKETS - 100, 100);
-        }
+  subscribeToSocket() {
+    this.socket.fromEvent('packets').subscribe((data: any) => {
+      this.packets.unshift(data);
+
+      if (this.packets.length > this.MAX_PACKETS) {
+        // remove 100 packets
+        this.packets.splice(this.MAX_PACKETS - 100, 100);
       }
     });
   }
@@ -49,7 +60,15 @@ export class PacketsComponent implements OnInit {
   }
 
   toggleUpdating(event: any) {
-    console.log(event);
     this.update = event.value;
+
+    if (!this.update) {
+      this.socket.disconnect();
+    } else {
+      this.socket.connect();
+      this.api.startSniffing().subscribe((data) => {
+        console.log(data);
+      });
+    }
   }
 }

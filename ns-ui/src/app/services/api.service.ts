@@ -24,4 +24,8 @@ export class ApiService {
   arpTables(): Observable<ArpTable> {
     return this.http.get<ArpTable>(environment.backendUrl + '/arp');
   }
+
+  startSniffing() {
+    return this.http.get(environment.backendUrl + '/start_sniffing');
+  }
 }
