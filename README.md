@@ -10,7 +10,7 @@ for CSCD58 Winter 2022.
 
 ## Description and Goals
 
-Our inital description of this project was simple. We wanted to make a simple wireshark clone; a tool to read packets in from our device and parse them for data. We wanted to add a few features onto this, including a whois lookup, arp table lookup, and nmap scan. We also wanted to make the UI as simple and easy to use as possible.
+Our initial description of this project was simple. We wanted to make a simple Wireshark clone; a tool to read packets in from our device and parse them for data. We wanted to add a few features onto this, including a whois lookup, arp table lookup, and nmap scan. We also wanted to make the UI as simple and easy to use as possible.
 
 Our goals as outline in the proposal were as follows:
 
@@ -33,7 +33,7 @@ I worked on a few different parts of the project. I created the flask app that r
 
 ### Armand Sarkezians
 
-I worked primarily on the backend, but did some setup on the frontend to enable my teammates early on. I worked on the packet sniffing, arptables, and whois code, working with Ahmed to create sniffing capabilities using the socketIO library. I wrote all files in the folders `structures` and `helpers`, creating an object-oriented approach to organizing the different protocols we read from sniffing packets. On the frontend, I built the project initally and created several components for the landing page (header, title, dropdowns for each functionality, etc.). I also came up with the name (super creative I know).
+I worked primarily on the backend, but did some setup on the frontend to enable my teammates early on. I worked on the packet sniffing, arptables, and whois code, working with Ahmed to create sniffing capabilities using the socketIO library. I wrote all files in the folders `structures` and `helpers`, creating an object-oriented approach to organizing the different protocols we read from sniffing packets. On the frontend, I built the project initially and created several components for the landing page (header, title, dropdowns for each functionality, etc.). I also came up with the name (super creative I know).
 
 ## Running the Sniffer
 
