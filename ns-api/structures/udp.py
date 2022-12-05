@@ -25,7 +25,8 @@ class UDP(IPv4, dict):
 
     def __str__(self):
         print('----------UDP----------')
-        print('Source Port: {}, Destination Port: {}, Length: {}'.format(self.src, self.dest, self.length))
+        print('Source: {}, Destination: {}'.format(self.src, self.dest))
+        print('Source Port: {}, Destination Port: {}, Length: {}'.format(self.src_port, self.dest_port, self.length))
         print('Data: {}'.format(self.raw_data))
         print('\n')
         return ""

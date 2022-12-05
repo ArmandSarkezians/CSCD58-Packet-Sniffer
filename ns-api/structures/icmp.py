@@ -24,6 +24,7 @@ class ICMP(IPv4, dict):
 
     def __str__(self):
         print('----------ICMP----------')
+        print('Source: {}, Destination: {}'.format(self.src, self.dest))
         print('Type: {}, Code: {}, Checksum: {}'.format(self.type, self.code, self.checksum))
         print('Data: {}'.format(self.raw_data))
         print('\n')

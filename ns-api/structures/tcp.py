@@ -39,7 +39,8 @@ class TCP(IPv4, dict):
 
     def __str__(self):
         print('----------TCP----------')
-        print('Source Port: {}, Destination Port: {}, Sequence: {}, Offset: {}'.format(self.src, self.dest, self.seq, self.offset))
+        print('Source: {}, Destination: {}'.format(self.src, self.dest))
+        print('Source Port: {}, Destination Port: {}, Sequence: {}, Offset: {}'.format(self.src_port, self.dest_port, self.seq, self.offset))
         print('URG: {}, ACK: {}, PSH: {}, RST: {}, SYN: {}, FIN:{}'.format(self.urg, self.ack, self.psh, self.rst, self.syn, self.fin))
         print('Data: {}'.format(self.raw_data))
         print('\n')
