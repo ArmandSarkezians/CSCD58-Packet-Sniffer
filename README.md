@@ -26,7 +26,7 @@ flask run
 
 ## Description and Goals
 
-Our inital description of this project was simple. We wanted to make a simple wireshark clone; a tool to read packets in from our device and parse them for data. We wanted to add a few features onto this, including a whois lookup, arp table lookup, and nmap scan. We also wanted to make the UI as simple and easy to use as possible. 
+Our initial description of this project was simple. We wanted to make a simple Wireshark clone; a tool to read packets in from our device and parse them for data. We wanted to add a few features onto this, including a whois lookup, arp table lookup, and nmap scan. We also wanted to make the UI as simple and easy to use as possible.
 
 Our goals as outline in the proposal were as follows:
 
@@ -45,9 +45,11 @@ I mainly worked on getting the backend and socketIO server working. I also helpe
 
 ### Mohamed Halat
 
+I worked on a few different parts of the project. I created the flask app that runs the backend and the socketIO server. I also created and designed most of the frontend. I also was responsible for data parsing for whois and arp data. The most challenging thing that I worked on was definitely setting up a socketIO server and getting it to work with the frontend and adding the ability to pause and resume the packet sniffing.
+
 ### Armand Sarkezians
 
-I worked primarlity on the backend, but did some setup on the frontend to enable my teammates early on. I worked on the packet sniffing, arptables, and whois code, working with Ahmed to create sniffing capabilities using the socketIO library. I wrote all files in the folders ```structures```(excluding whois) and ```helpers```, creating an object-oriented approach to organizing the different protocols we read from sniffing packets. On the frontend, I built the project initally and created several components for the landing page (header, title, dropdowns for each functionality, etc.). I also came up with the name (super creative I know).
+I worked primarily on the backend, but did some setup on the frontend to enable my teammates early on. I worked on the packet sniffing, arptables, and whois code, working with Ahmed to create sniffing capabilities using the socketIO library. I wrote all files in the folders `structures` and `helpers`, creating an object-oriented approach to organizing the different protocols we read from sniffing packets. On the frontend, I built the project initially and created several components for the landing page (header, title, dropdowns for each functionality, etc.). I also came up with the name (super creative I know).
 
 ## Running the Sniffer
 
@@ -91,4 +93,3 @@ Overall, our implementation of an Object Oriented approach to packet sniffing an
 In conclusion, this project was super fun for all of us, we learned a lot during its creation and we hope you enjoy using/grading it as much as we enjoyed making it.
 
 Thanks!
-
