@@ -5,9 +5,7 @@
     This is the main file for the nmap information grabber.
 """
 
-import subprocess, re
-from .arptables import get_arp_table
-from structures import WhoIs
+import subprocess
 
 def get_nmap(ip):
     result = subprocess.run(["nmap", "-sP", ip], stdout=subprocess.PIPE)
