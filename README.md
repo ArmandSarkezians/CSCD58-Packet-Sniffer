@@ -12,7 +12,7 @@ for CSCD58 Winter 2022.
 
 ## Contributions
 ### Ahmed Halat
-
+I mainly worked on getting the backend and socketIO server working. I also helped with writing the packet sniffing code in the backend and created the UI components in the frontend that render the formatted packet headers and RAW packet data in a human readable format.
 ### Mohamed Halat
 
 ### Armand Sarkezians
@@ -38,6 +38,14 @@ In the case of ARPTables and Whois, we also use [re](https://docs.python.org/3/l
 
 ### Frontend
 Our frontend is built using [Angular](https://angular.io/), a popular Typescript framework. The frontend UI is mainly designed and built by us, with a few components from [PrimeNG](https://www.primefaces.org/primeng/), a popular UI library for Angular. We also used [NGX-SocketIO](https://www.npmjs.com/package/ngx-socket-io) to connect to the SocketIO server on the backend.
-## Analysis
+## Analysis, Implementation and Lessons Learned
+Through the use of Object Oriented Programming, we were able to create a modular and extensible codebase that is easy to maintain and expand upon. It also required that we think about the structure of the data we were working with and how to parse the required fields from the raw data into our frame/packet objects.
+
+We also learned how to use SocketIO to create a real time connection between the frontend and backend. We took packets/second into consideration when deciding whether to use a polling or websocket connection. We decided to use a websocket connection as it is more efficient and allows for a more responsive UI.
+
+We did also try to setup a REDIS server to save packets into a database and allow them to be loaded into the frontend on reload. However, the number of packets created significant slowdown in the server (when read/write) and we were unable to get this working in time for the deadline.
+
+Overall, our implementation of an Object Oriented approach to packet sniffing and other network details allowed us to gain a deeper understanding of how the internet works and how to parse and display the data we receive from the network.
+
 
 ## Conclusion
