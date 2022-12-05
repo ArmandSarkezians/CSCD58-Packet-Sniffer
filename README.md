@@ -10,19 +10,19 @@ for CSCD58 Winter 2022.
 
 ## Running the application
 
-First, make sure you read the readme's in ns-ui and ns-api. THey will walk you through installing all of the dependencies and setting up the environment.
+First, make sure you read the readme's in ns-ui and ns-api. They will walk you through installing all of the dependencies and setting up the environment.
 
 Then, to run the application follow these steps:
-``` 
+
+```
 cd ns-ui
-npm run start 
+npm run start
 
 cd ../ns-api
 flask run
 
 # Go to http://localhost:4200/ in your browser
 ```
-
 
 ## Description and Goals
 
@@ -66,15 +66,15 @@ We used a few different tools to implement this project. The backend is written 
 
 In order to perform packet sniffing on the backend, we used the [Recvfrom](https://docs.python.org/3/library/socket.html#socket.socket.recvfrom) function from the python socket library. This function allows us to receive data from a socket, and returns the data and the address of the sender.
 
-The raw data from the socket is used to initialize the [Ethernet Object](ns-api/structures/ethernet.py) we created. This object is parses the Ethernet header data and stores the rest of the raw object data.
-We then initialize the [IP Object](ns-api/structures/ipv4.py) and pass it the raw data from the Ethernet object. This object parses the IP header data and stores the rest of the raw object data. We then use the protocol number from the IP header to determine which protocol to initialize next. We initialize either the [TCP Object](ns-api/structures/tcp.py), [UDP Object](ns-api/structures/udp.py), or [ICMP Object](ns-api/structures/icmp.py) and pass it the raw data from the IP object. This object parses the protocol header data and stores the rest of the raw object data and is finally returned to the frontend through the SocketIO connection.
+The raw data from the socket is used to initialize the [Ethernet Object](https://github.com/ArmandSarkezians/CSCD58-Packet-Sniffer/blob/main/ns-api/structures/ethernet.py) we created. This object is parses the Ethernet header data and stores the rest of the raw object data.
+We then initialize the [IP Object](https://github.com/ArmandSarkezians/CSCD58-Packet-Sniffer/blob/main/ns-api/structures/ipv4.py) and pass it the raw data from the Ethernet object. This object parses the IP header data and stores the rest of the raw object data. We then use the protocol number from the IP header to determine which protocol to initialize next. We initialize either the [TCP Object](https://github.com/ArmandSarkezians/CSCD58-Packet-Sniffer/blob/main/ns-api/structures/tcp.py), [UDP Object](https://github.com/ArmandSarkezians/CSCD58-Packet-Sniffer/blob/main/ns-api/structures/udp.py), or [ICMP Object](https://github.com/ArmandSarkezians/CSCD58-Packet-Sniffer/blob/main/ns-api/structures/icmp.py) and pass it the raw data from the IP object. This object parses the protocol header data and stores the rest of the raw object data and is finally returned to the frontend through the SocketIO connection.
 
 Sniffing is only turned on when there is a connection on the SocketIO server and the frontend sends a api request to the backend to start sniffing. This allows us to pause and resume sniffing without having to close the socket and open a new one. Sniffing is also paused when the frontend socket is disconnected to prevent the backend from running indefinitely.
 
 #### Arptables, Whois and Nmap
 
 The implementation for fetching ARPTables, whois and nmap information is very similar. We use the python [subprocess](https://docs.python.org/3/library/subprocess.html) library to run the respective commands and return the output.
-In the case of ARPTables and Whois, we also use [re](https://docs.python.org/3/library/re.html) to parse the output and return it in a more readable format. This required building out custom regex patterns for each command as seen in the [Whois Object](ns-api/structures/whois.py).
+In the case of ARPTables and Whois, we also use [re](https://docs.python.org/3/library/re.html) to parse the output and return it in a more readable format. This required building out custom regex patterns for each command as seen in the [Whois Object](https://github.com/ArmandSarkezians/CSCD58-Packet-Sniffer/blob/main/ns-api/structures/whois.py).
 
 ### Frontend
 
