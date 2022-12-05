@@ -14,14 +14,14 @@ class UDP(IPv4, dict):
     def __init__(self, raw_data):
         super().__init__(raw_data)
 
-        src, dest, size = unpack('! H H 2x H', raw_data[:8])
+        src_port, dest_port, size = unpack('! H H 2x H', raw_data[:8])
 
-        self.src = src
-        self.dest = dest
+        self.src_port = src_port
+        self.dest_port = dest_port
         self.length = size
         self.raw_data = raw_data
 
-        dict.__init__(self, raw_data=raw_data, src=self.src, dest=self.dest, length=self.length, name='UDP')
+        dict.__init__(self, raw_data=raw_data, src=self.src, dest=self.dest, src_port=self.src_port, dest_port=self.dest_port, length=self.length, name='UDP')
 
     def __str__(self):
         print('----------UDP----------')

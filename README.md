@@ -8,6 +8,22 @@ Created by:
 
 for CSCD58 Winter 2022.
 
+## Running the application
+
+First, make sure you read the readme's in ns-ui and ns-api. THey will walk you through installing all of the dependencies and setting up the environment.
+
+Then, to run the application follow these steps:
+``` 
+cd ns-ui
+npm run start 
+
+cd ../ns-api
+flask run
+
+# Go to http://localhost:4200/ in your browser
+```
+
+
 ## Description and Goals
 
 Our inital description of this project was simple. We wanted to make a simple wireshark clone; a tool to read packets in from our device and parse them for data. We wanted to add a few features onto this, including a whois lookup, arp table lookup, and nmap scan. We also wanted to make the UI as simple and easy to use as possible. 
@@ -31,7 +47,7 @@ I mainly worked on getting the backend and socketIO server working. I also helpe
 
 ### Armand Sarkezians
 
-I worked primarlity on the backend, but did some setup on the frontend to enable my teammates early on. I worked on the packet sniffing, arptables, and whois code, working with Ahmed to create sniffing capabilities using the socketIO library. I wrote all files in the folders ```structures``` and ```helpers```, creating an object-oriented approach to organizing the different protocols we read from sniffing packets. On the frontend, I built the project initally and created several components for the landing page (header, title, dropdowns for each functionality, etc.). I also came up with the name (super creative I know).
+I worked primarlity on the backend, but did some setup on the frontend to enable my teammates early on. I worked on the packet sniffing, arptables, and whois code, working with Ahmed to create sniffing capabilities using the socketIO library. I wrote all files in the folders ```structures```(excluding whois) and ```helpers```, creating an object-oriented approach to organizing the different protocols we read from sniffing packets. On the frontend, I built the project initally and created several components for the landing page (header, title, dropdowns for each functionality, etc.). I also came up with the name (super creative I know).
 
 ## Running the Sniffer
 

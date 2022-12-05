@@ -19,7 +19,8 @@ class ICMP(IPv4, dict):
         self.code = code
         self.checksum = checksum
         self.raw_data = raw_data
-        dict.__init__(self, raw_data=raw_data, type=self.type, code=self.code, checksum=self.checksum, name='ICMP')
+
+        dict.__init__(self, raw_data=raw_data, src=self.src, dest=self.dest, type=self.type, code=self.code, checksum=self.checksum, name='ICMP')
 
     def __str__(self):
         print('----------ICMP----------')
