@@ -1,22 +1,22 @@
 <h3>Mapped Fields</h3>
 <div class="packet">
-    <p> Name: {{packet.name}} </p>
-    <p> Protocol: {{packet.protocol}} </p>
-    <p> Source: {{packet.src}} </p>
-    <p> Destination: {{packet.dest}} </p>
-    <p> Sequence: {{packet.seq}} </p>
-    <p> ACK: {{packet.ack}} </p>
-    <p> TTL: {{packet.ttl}} </p>
-    <p> Syn: {{packet.syn}} </p>
-    <p> Fin: {{packet.fin}} </p>
-    <p> Rst: {{packet.rst}} </p>
-    <p> Psh: {{packet.psh}} </p>
-    <p> Urg: {{packet.urg}} </p>
+  <p>Name: {{ packet.name }}</p>
+  <p>Protocol: {{ packet.protocol }}</p>
+  <p>Source: {{ packet.src }}</p>
+  <p>Source Port: {{ packet.src_port }}</p>
+  <p>Destination: {{ packet.dest }}</p>
+  <p>Destination Port: {{ packet.dest_port }}</p>
+  <p>Sequence: {{ packet.seq }}</p>
+  <p>ACK: {{ packet.ack }}</p>
+  <p>TTL: {{ packet.ttl }}</p>
+  <p>Syn: {{ packet.syn }}</p>
+  <p>Fin: {{ packet.fin }}</p>
+  <p>Rst: {{ packet.rst }}</p>
+  <p>Psh: {{ packet.psh }}</p>
+  <p>Urg: {{ packet.urg }}</p>
 </div>
 
 <h2>Raw Data</h2>
-<pre class="raw_text" style="white-space: pre-wrap; overflow-wrap: break-word;">
-    {{
-        parseData(packet.raw_data)
-    }}
+<pre class="raw_text" style="white-space: pre-wrap; overflow-wrap: break-word">
+    {{ parseData(packet.raw_data) }}
 </pre>

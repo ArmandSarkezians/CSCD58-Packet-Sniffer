@@ -69,6 +69,8 @@ In order to perform packet sniffing on the backend, we used the [Recvfrom](https
 The raw data from the socket is used to initialize the [Ethernet Object](ns-api/structures/ethernet.py) we created. This object is parses the Ethernet header data and stores the rest of the raw object data.
 We then initialize the [IP Object](ns-api/structures/ipv4.py) and pass it the raw data from the Ethernet object. This object parses the IP header data and stores the rest of the raw object data. We then use the protocol number from the IP header to determine which protocol to initialize next. We initialize either the [TCP Object](ns-api/structures/tcp.py), [UDP Object](ns-api/structures/udp.py), or [ICMP Object](ns-api/structures/icmp.py) and pass it the raw data from the IP object. This object parses the protocol header data and stores the rest of the raw object data and is finally returned to the frontend through the SocketIO connection.
 
+Sniffing is only turned on when there is a connection on the SocketIO server and the frontend sends a api request to the backend to start sniffing. This allows us to pause and resume sniffing without having to close the socket and open a new one. Sniffing is also paused when the frontend socket is disconnected to prevent the backend from running indefinitely.
+
 #### Arptables, Whois and Nmap
 
 The implementation for fetching ARPTables, whois and nmap information is very similar. We use the python [subprocess](https://docs.python.org/3/library/subprocess.html) library to run the respective commands and return the output.
@@ -82,7 +84,7 @@ Our frontend is built using [Angular](https://angular.io/), a popular Typescript
 
 Through the use of Object Oriented Programming, we were able to create a modular and extensible codebase that is easy to maintain and expand upon. It also required that we think about the structure of the data we were working with and how to parse the required fields from the raw data into our frame/packet objects.
 
-We also learned how to use SocketIO to create a real time connection between the frontend and backend. We took packets/second into consideration when deciding whether to use a polling or websocket connection. We decided to use a websocket connection as it is more efficient and allows for a more responsive UI.
+We also learned how to use SocketIO to create a real time connection between the frontend and backend. We took packets/second into consideration when deciding whether to use a polling or websocket connection. We decided to use a websocket connection as it is more efficient and allows for a more responsive UI. We also learned how to use the SocketIO library to pause and resume sniffing without having to close and open a new socket and how to take advantage of multiple threads to run the sniffing and SocketIO server concurrently.
 
 We did also try to setup a REDIS server to save packets into a database and allow them to be loaded into the frontend on reload. However, the number of packets created significant slowdown in the server (when read/write) and we were unable to get this working in time for the deadline.
 

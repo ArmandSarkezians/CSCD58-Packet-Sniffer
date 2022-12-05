@@ -12,11 +12,12 @@ export interface Packet {
   syn?: number;
   fin?: number;
   raw_data?: any;
-  dest?: number;
-  src?: number;
+  dest?: string;
+  dest_port?: number;
+  src?: string;
+  src_port?: number;
   protocol?: number;
 }
-
 
 export interface PacketTable {
   id: number;
