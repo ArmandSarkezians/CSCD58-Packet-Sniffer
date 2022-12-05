@@ -1,10 +1,12 @@
 # Setup
+
 ```bash
-npm install
+npm install --force
 npm i -g @angular/cli
 ```
 
 # Running
+
 ```bash
 npm run start
 ```
