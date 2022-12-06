@@ -12,7 +12,7 @@ import { ButtonModule } from 'primeng/button';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SnifferComponent } from './components/sniffer/sniffer.component';
-import { WhoisComponent } from './components/whois/whois.component';
+import { NMapComponent } from './components/nmap/nmap.component';
 import { ArpTablesComponent } from './components/arptables/arp-tables.component';
 import { HeaderComponent } from './components/header/header.component';
 import { PacketsComponent } from './components/packets/packets.component';
@@ -26,7 +26,7 @@ const config: SocketIoConfig = { url: environment.backendUrl, options: {} };
   declarations: [
     AppComponent,
     SnifferComponent,
-    WhoisComponent,
+    NMapComponent,
     ArpTablesComponent,
     HeaderComponent,
     PacketsComponent,

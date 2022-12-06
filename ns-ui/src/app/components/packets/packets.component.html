@@ -60,7 +60,7 @@
   </ng-template>
   <ng-template pTemplate="body" let-packet>
     <tr (onClick)="clickedItem(packet)" style="cursor: pointer">
-      <td>{{ packet.protocol }}/{{ packet.name }}</td>
+      <td>{{ packet.name }}</td>
       <td>{{ packet.src }}</td>
       <td>{{ packet.src_port }}</td>
       <td>{{ packet.dest }}</td>

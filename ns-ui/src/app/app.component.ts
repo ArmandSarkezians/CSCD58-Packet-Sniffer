@@ -14,11 +14,11 @@ export class AppComponent {
       icon: 'pi pi-fw pi-home',
       routerLink: ['/sniffer'],
     },
-    // {
-    //   label: 'Whois',
-    //   icon: 'pi pi-fw pi-user',
-    //   routerLink: ['/whois'],
-    // },
+    {
+      label: 'nmap',
+      icon: 'pi pi-fw pi-user',
+      routerLink: ['/nmap'],
+    },
     // {
     //   label: 'ArpTable',
     //   icon: 'pi pi-fw pi-table',

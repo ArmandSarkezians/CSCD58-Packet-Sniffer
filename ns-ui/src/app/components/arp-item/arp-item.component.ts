@@ -12,7 +12,6 @@ export class ArpItemComponent implements OnInit {
   @Input() data: ArpData;
 
   whois: WhoIs;
-  nmap: any;
 
   constructor(
     public ref: DynamicDialogRef,
@@ -22,7 +21,6 @@ export class ArpItemComponent implements OnInit {
     this.data = this.config.data;
     this.ref = ref;
     this.whois = this.data?.whois;
-    this.nmap = this.data?.nmap;
   }
 
   ngOnInit(): void {}

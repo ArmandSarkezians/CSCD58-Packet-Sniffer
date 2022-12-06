@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PACKETS } from '../../samples/mockpackets';
 import { Packet, PacketTable } from '../../models/Packet';
 import { Socket } from 'ngx-socket-io';
@@ -12,7 +12,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./packets.component.css'],
   providers: [DialogService],
 })
-export class PacketsComponent implements OnInit {
+export class PacketsComponent implements OnInit, OnDestroy {
   packets = [] as PacketTable[];
   messages: any[] = [];
 
@@ -39,6 +39,12 @@ export class PacketsComponent implements OnInit {
     };
   }
 
+  ngOnDestroy(): void {
+    this.update = false;
+    this.socket.disconnect();
+    this.socket.removeAllListeners();
+  }
+
   subscribeToSocket() {
     this.socket.fromEvent('packets').subscribe((data: any) => {
       this.packets.unshift(data);
@@ -57,6 +63,25 @@ export class PacketsComponent implements OnInit {
       header: 'Packet',
       width: '70%',
     });
+  }
+
+  toHexString(buffer: any) {
+    const byteArray = new Uint8Array(buffer);
+    return byteArray.reduce(
+      (output, elem) => output + ('0' + elem.toString(16)).slice(-2),
+      ''
+    );
+  }
+
+  parseData(arrayBuffer: any) {
+    var hex = '';
+    var bytes = new Uint8Array(arrayBuffer);
+
+    bytes.forEach((byte) => {
+      hex += String.fromCharCode(byte);
+    });
+
+    return hex;
   }
 
   toggleUpdating(event: any) {

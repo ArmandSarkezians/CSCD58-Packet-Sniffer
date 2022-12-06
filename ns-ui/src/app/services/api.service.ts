@@ -17,6 +17,12 @@ export class ApiService {
     return this.http.get<WhoIs>(environment.backendUrl + '/whois');
   }
 
+  nmap(): Observable<string> {
+    return this.http.get<string>(environment.backendUrl + '/nmap', {
+      responseType: 'text' as 'json',
+    });
+  }
+
   lookup(ip: string): Observable<ArpData> {
     return this.http.get<ArpData>(environment.backendUrl + '/lookup/' + ip);
   }
