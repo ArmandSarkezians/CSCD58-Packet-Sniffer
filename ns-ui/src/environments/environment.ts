@@ -4,5 +4,5 @@
 
 export const environment = {
   production: false,
-  backendUrl: 'http://0.0.0.0:5000',
+  backendUrl: 'http://0.0.0.0:7654',
 };

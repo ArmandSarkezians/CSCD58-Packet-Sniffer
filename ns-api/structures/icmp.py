@@ -23,9 +23,9 @@ class ICMP(IPv4, dict):
         dict.__init__(self, raw_data=raw_data, src=self.src, dest=self.dest, type=self.type, code=self.code, checksum=self.checksum, name='ICMP')
 
     def __str__(self):
-        print('----------ICMP----------')
-        print('Source: {}, Destination: {}'.format(self.src, self.dest))
-        print('Type: {}, Code: {}, Checksum: {}'.format(self.type, self.code, self.checksum))
-        print('Data: {}'.format(self.raw_data))
-        print('\n')
-        return ""
+        s = '----------ICMP----------\n'
+        s += 'Source: {}, Destination: {}\n'.format(self.src, self.dest)
+        s += 'Type: {}, Code: {}, Checksum: {}\n'.format(self.type, self.code, self.checksum)
+        s += 'Data: {}\n'.format(self.raw_data)
+        s += '\n'
+        return s

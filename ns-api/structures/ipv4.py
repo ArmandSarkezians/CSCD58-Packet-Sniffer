@@ -34,9 +34,9 @@ class IPv4(Ethernet, dict):
         dict.__init__(self, version=self.version, ttl=self.ttl, protocol=self.protocol, src=self.src, dest=self.dest, raw_data=self.raw_data, name='IPv4')
 
     def __str__(self):
-        print('----------IPv4----------')
-        print('Version: {}, TTL: {}, Protocol: {},'.format(self.version, self.ttl, self.protocol))
-        print('Source: {}, Destination: {}'.format(self.src, self.dest))
-        print('Data: {}'.format(self.raw_data))
-        print('\n')
-        return ""
+        s = '----------IPv4----------'
+        s += 'Version: {}, TTL: {}, Protocol: {}\n'.format(self.version, self.ttl, self.protocol)
+        s += 'Source: {}, Destination: {}\n'.format(self.src, self.dest)
+        s += 'Data: {}\n'.format(self.raw_data)
+        s += '\n'
+        return s

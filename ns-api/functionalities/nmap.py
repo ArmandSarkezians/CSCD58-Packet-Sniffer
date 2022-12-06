@@ -8,7 +8,7 @@
 import subprocess
 
 def get_nmap(ip):
-    result = subprocess.run(["nmap", "-sP", ip], stdout=subprocess.PIPE)
+    result = subprocess.run(["nmap", "-sL", ip], stdout=subprocess.PIPE)
     return result.stdout.decode("utf-8")
 
 if __name__ == "__main__":

@@ -22,8 +22,8 @@ class Ethernet(Packet, dict):
         dict.__init__(self, raw_data=raw_data, dest=self.dest, src=self.src, protocol=self.protocol, name='Ethernet')
 
     def __str__(self):
-        print('----------Ethernet----------')
-        print('Source: {}, Destination: {}, Protocol: {}'.format(self.src, self.dest, self.protocol))
-        print('Data: {}'.format(self.raw_data))
-        print('\n')
-        return ""
+        s = '----------Ethernet----------'
+        s += 'Source: {}, Destination: {}, Protocol: {}\n'.format(self.src, self.dest, self.protocol)
+        s += 'Data: {}\n'.format(self.raw_data)
+        s += '\n'
+        return s

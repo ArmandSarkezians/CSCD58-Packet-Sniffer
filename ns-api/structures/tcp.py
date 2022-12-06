@@ -38,10 +38,10 @@ class TCP(IPv4, dict):
         dict.__init__(self, raw_data=raw_data, src=self.src, dest=self.dest, src_port=self.src_port, dest_port=self.dest_port, offset=self.offset, seq=self.seq, ack=self.ack, urg=self.urg, psh=self.psh, rst=self.rst, syn=self.syn, fin=self.fin, name='TCP')
 
     def __str__(self):
-        print('----------TCP----------')
-        print('Source: {}, Destination: {}'.format(self.src, self.dest))
-        print('Source Port: {}, Destination Port: {}, Sequence: {}, Offset: {}'.format(self.src_port, self.dest_port, self.seq, self.offset))
-        print('URG: {}, ACK: {}, PSH: {}, RST: {}, SYN: {}, FIN:{}'.format(self.urg, self.ack, self.psh, self.rst, self.syn, self.fin))
-        print('Data: {}'.format(self.raw_data))
-        print('\n')
-        return ""
+        s = '----------TCP----------\n'
+        s += 'Source: {}, Destination: {}\n'.format(self.src, self.dest)
+        s += 'Source Port: {}, Destination Port: {}, Sequence: {}, Offset: {}\n'.format(self.src_port, self.dest_port, self.seq, self.offset)
+        s += 'URG: {}, ACK: {}, PSH: {}, RST: {}, SYN: {}, FIN:{}\n'.format(self.urg, self.ack, self.psh, self.rst, self.syn, self.fin)
+        s += 'Data: {}\n'.format(self.raw_data)
+        s += '\n'
+        return s

@@ -8,4 +8,4 @@ class Packet(dict):
         super().__init__(**kwargs)
 
     def print(self):
-        print(self)
+        return self
