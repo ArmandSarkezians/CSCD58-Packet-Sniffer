@@ -36,10 +36,8 @@ def nmap():
 @app.route('/lookup/<ip>')
 def lookup(ip):
     whois = get_whois([ip])[0].to_json()
-    nmap = get_nmap(ip)
     return {
         "whois": whois,
-        "nmap": nmap
     }
 
 
