@@ -17,7 +17,7 @@ s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(3))
 
 def emitter(channel, data):
     socketio.emit(channel, data)
-    print(data)
+    # print(data)
 
 RAT = Sniffer(emitter)
 
@@ -29,6 +29,9 @@ def index():
 def arp():
     return get_arp_table()
 
+@app.route('/nmap')
+def nmap():
+    return get_nmap()
 
 @app.route('/lookup/<ip>')
 def lookup(ip):

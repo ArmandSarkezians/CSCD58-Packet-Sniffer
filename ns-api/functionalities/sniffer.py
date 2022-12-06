@@ -23,7 +23,7 @@ class Sniffer():
 
 
     def sniff(self):
-        s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(3))
+        s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(0x800))
         print("Listening for packets...\n")
 
         table = {num:name[len("IPPROTO_"):]
@@ -31,7 +31,7 @@ class Sniffer():
             if name.startswith("IPPROTO_")}
 
         while self.on:
-            raw_data, _ = s.recvfrom(65536)
+            raw_data, _ = s.recvfrom(2048)
             hdr = Ethernet(raw_data)
 
             # Protocol 8 is for IPv4

@@ -19,7 +19,6 @@ def get_whois(ips=get_ips()):
     for item in ips:
         result = subprocess.run(["whois", item], stdout=subprocess.PIPE)
         data = result.stdout.decode("utf-8")
-        print(item)
         whois.append(WhoIs(data))
     return whois
 
