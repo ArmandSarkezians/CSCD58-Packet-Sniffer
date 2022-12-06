@@ -8,6 +8,8 @@ Created by:
 
 for CSCD58 Winter 2022.
 
+#### [Video Submission](https://youtu.be/1iXwUShqtr0)
+
 ## Running the application
 
 First, make sure you read the readme's in ns-ui and ns-api. They will walk you through installing all of the dependencies and setting up the environment.
